@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <style>
+        .ui.menu .item:before {
+            background: none;
+        }
+    </style>
+    <div class="navbar ui menu bar fixed row navbar"
+         style="margin-left: unset !important; width: 100%; position: sticky;">
+        <div class="popup">
+            <a class="ui icon item" style="height: 100% !important;" onclick="showDrawer()">
+                <i class="sidebar icon"></i>
+            </a>
+        </div>
+
+        <div class="ui right aligned item">
+            <h3>
+                <i class="wrench icon"></i>
+                S.C.G.E.A
+            </h3>
+        </div>
+        <div class="ui right aligned item">
+            <i class="circle blue icon" style="max-height: 45px"></i>
+            <span><a href="/admin" target="_blank">{{ user.first_name }}</a></span>
+        </div>
+    </div>
+    <script>
+        $('.ui.sidebar').sidebar({
+            context: $('.bottom.segment')
+        })
+            .sidebar('attach events', '.menu-sidenav');
+
+        $('.dropdown')
+            .dropdown();
+    </script>
+{% endblock %}

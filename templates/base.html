@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script type="text/javascript" src="{% static 'js/jQuery.js' %}?v=3.6.0"></script>
+    <script type="text/javascript" src="{% static 'jquery-ui/jquery-ui.js' %}?v=1.12.1"></script>
+    <script type="text/javascript" src="{% static 'semantic-ui/semantic.js' %}?v=2.8"></script>
+    <script type="text/javascript" src="{% static 'js/semantic-ui-alert.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/datepicker/jquery-ui-1.12.1.custom/jquery-ui.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/lightbox.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/lightbox.css' %}">
+
+        <script>
+            function AlertSuccess(head, text, time = 3) {
+                $('body').toast({
+                    title: head,
+                    message: text,
+                    showProgress: 'bottom',
+                     //make it look like 2.7.0
+                    showIcon: true,
+                    position: 'top right',
+                    progressUp: true,
+                    classActions: 'attached',
+                    class: 'success',
+                    opacity: 1,
+                    horizontal: true,
+                    className: {
+                        box:'toast-box',
+                        title:'header',
+                        icon: 'icon'
+                    },
+                    displayTime: time * 1000,
+                  })
+                ;
+
+            }
+
+            function AlertDanger(head, text, time = 5) {
+                $('body').toast({
+                    title: head,
+                    message: text,
+                    showProgress: 'bottom',
+                     //make it look like 2.7.0
+                    showIcon: true,
+                    position: 'top right',
+                    progressUp: true,
+                    classActions: 'attached',
+                    class: 'error',
+                    opacity: 1,
+                    className: {
+                        box:'toast-box',
+                        title:'header',
+                        icon: 'icon'
+                    },
+                    displayTime: time * 1000,
+                  })
+                ;
+            }
+
+            function AlertWarning(head, text, time = 5) {
+                $('body').toast({
+                    title: head,
+                    message: text,
+                    showProgress: 'bottom',
+                     //make it look like 2.7.0
+                    showIcon: true,
+                    position: 'top right',
+                    progressUp: true,
+                    classActions: 'attached',
+                    class: 'warning',
+                    opacity: 1,
+                    className: {
+                        box:'toast-box',
+                        title:'header',
+                        icon: 'icon'
+                    },
+                    displayTime: time * 1000,
+                  })
+                ;
+            }
+
+            function AlertInfo(head, text, time = 3) {
+                $('body').toast({
+                    title: head,
+                    message: text,
+                    showProgress: 'bottom',
+                     //make it look like 2.7.0
+                    showIcon: true,
+                    position: 'top right',
+                    progressUp: true,
+                    classActions: 'attached',
+                    class: 'info',
+                    opacity: 1,
+                    className: {
+                        box:'toast-box',
+                        title:'header',
+                        icon: 'icon'
+                    },
+                    displayTime: time * 1000,
+                  })
+                ;
+            }
+        </script>
+
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}?v=1.0">
+    <link rel="stylesheet" href="{% static 'semantic-ui/semantic.css' %}?v=2.8">
+    <link rel="stylesheet" href="{% static 'jquery-ui/jquery-ui.css' %}?v=1.12.1">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/semantic-ui-alert.css' %}?v=1.0">
+
+    <title>SCGEA</title>
+
+</head>
+<body class="bg">
+{% block content %}
+
+{% endblock %}
+
+
+<div class="top right ui toast-container "></div>
+</body>
+</html>

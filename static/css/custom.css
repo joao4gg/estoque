@@ -1,0 +1,244 @@
+.btn-collor {
+    background-color: #d7510c !important;
+}
+
+.btn-collor:hover {
+    background-color: #d7840b !important;
+}
+
+
+label {
+    color: #0d0301 !important;
+}
+
+input#file_logo {
+    display: none;
+    width: 115px;
+    height: 115px;
+}
+
+td, th {
+    max-width: initial !important;
+    border-radius: 2px;
+}
+
+.ui.grid > * {
+    padding-left: initial !important;
+    padding-right: initial !important;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.h-100 {
+    width: 100%;
+}
+
+#layer {
+    background: black;
+    opacity: 0.6;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 4000 !important;
+    display: none;
+}
+
+#load {
+    width: 100px;
+    position: fixed;
+    top: 48%;
+    margin-top: -50px;
+    margin-left: -50px;
+    left: 48%;
+    text-align: center;
+    z-index: 6100;
+    display: none;
+    font-size: 10px;
+    color: black;
+}
+
+.input-buscas {
+    border: 1px !important;
+    margin: 0 !important;
+    padding: 1.3rem !important;
+    height: 25px !important;
+}
+
+.th-busca th {
+    text-align: left !important;
+    padding: 0 0 !important;
+}
+
+.bg_fenix {
+    background-color: #dadbc8;
+}
+
+.w-card-menu {
+    width: 10% !important;
+    color: inherit;
+}
+
+.d-none {
+    display: none !important;
+}
+
+.fx_title {
+    font-size: 1rem !important;
+    margin-top: 5% !important;
+}
+
+.fx_content {
+    padding-top: 3% !important;
+}
+
+.fx_container_form {
+    width: 60% !important;
+    left: 20% !important;
+}
+
+.floating {
+    width: 100% !important;
+    margin-top: 5% !important;
+    position: fixed !important;
+    z-index: 100 !important;
+}
+
+.mensagem {
+    width: 25% !important;
+    margin-right: 0.5% !important;
+}
+
+.floating_elements {
+    position: fixed;
+    right: 4%;
+    bottom: 2%;
+    z-index: 100000000;
+}
+
+#floating_gerar_lote {
+    position: fixed;
+    right: 4%;
+    bottom: 2%;
+    opacity: 50%;
+    display: none;
+}
+
+.fx_card_center {
+    width: 25% !important;
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+}
+
+.fx_navbar {
+    height: 6% !important;
+
+}
+
+.image_dim{
+    height: 200px !important;
+}
+
+.card_image_dim{
+    width: 10%; !important;
+}
+
+.button_voltar_gravar{
+    width: 15%!important;
+}
+
+.df_button_width{
+    width: 150px !important;
+}
+
+.inline_form_button{
+    width: 100% !important;
+    margin-top: 24px !important;
+}
+
+.card_container{
+    width: 60% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 15px !important;
+}
+
+.blink_me {
+    animation: mymove 1.5s infinite alternate;
+    font-size: 3em;
+    margin-top: 8%;
+    color: red;
+}
+
+@-webkit-keyframes mymove {
+    from {opacity:0.1;}
+    to {opacity: 1;}
+}
+
+.blink_me_static{
+    font-size: 3em;
+    margin-top: 8%;
+    color: red;
+}
+
+@media only screen and (max-width: 1359px) {
+
+    .fx_title {
+        font-size: 0.9rem !important;
+        margin-top: 5% !important;
+    }
+
+    .w-card-menu {
+        width: 13% !important;
+        color: inherit;
+    }
+
+    .fx_content {
+        padding-top: 3% !important;
+    }
+
+    .fx_card_center {
+        width: 50% !important;
+        margin-top: auto !important;
+        margin-bottom: auto !important;
+    }
+
+    .fx_container_form {
+        width: 80% !important;
+        left: 10% !important;
+    }
+}
+
+
+@media only screen and (max-width: 1081px) {
+
+    .w-card-menu {
+        width: 27% !important;
+        color: inherit;
+    }
+
+    .fx_container_cards {
+        padding-top: 8%;
+    }
+
+    .ui.form .field {
+        margin-left: 1rem !important;
+    }
+
+    .fx_content {
+        padding-top: 8% !important;
+    }
+
+    .titulos_sidenav {
+        margin-left: 20% !important;
+    }
+
+    .fx_card_center {
+        margin-top: 5% !important;
+        width: 80% !important;
+    }
+
+}

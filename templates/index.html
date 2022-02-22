@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% include 'elements/navbar.html' %}
+    <div class="ui left fixed vertical menu d-none" style="margin-top: 2.7%" id="drawer">
+        <a class="large item">
+            <div class="ui left"><i class="home icon"></i>Home</div>
+        </a>
+        <a class="large item">
+            <div class="ui left"><i class="search icon"></i>Busca Itens</div>
+        </a>
+        <a class="large item">
+            <div class="ui left"><i class="warning icon"></i>Cadastro Pendentes</div>
+        </a>
+        <a class="item"></a>
+    </div>
+    <script>
+        function showDrawer(){
+            let drawer = document.getElementById('drawer')
+            drawer.removeAttribute('class')
+            if(drawer.hasAttribute('value')){
+                drawer.setAttribute('class', 'ui left fixed vertical menu d-none')
+                drawer.removeAttribute('value')
+            }else{
+                drawer.setAttribute('class', 'ui left fixed vertical menu')
+                drawer.setAttribute('value', 'active')
+            }
+        }
+    </script>
+{% endblock %}

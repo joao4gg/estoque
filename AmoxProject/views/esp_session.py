@@ -6,15 +6,22 @@ from AmoxProject.models.item_amox import ItemAmox
 
 
 @csrf_exempt
-def esp_session(request):
+def esp_session(request, encode):
     if request.method == 'POST':
-        body = basic_decode(request.POST['payload'])
+        body = basic_decode(encode)
 
-        model = ItemAmox.objects.create()
-        model.id_rfid = body['id']
-        model.sac = body['sac']
-        model.picc = body['picc']
-        model.save()
+        item = ItemAmox.objects.filter(id_rfid=body['id']).last()
+        if item is not None:
+            if item.available:
+                item.available = False
+            else:
+                item.available = True
 
+        else:
+            model = ItemAmox.objects.create()
+            model.id_rfid = body['id']
+            model.save()
+
+        return HttpResponse(200)
     else:
         return HttpResponse(403)
