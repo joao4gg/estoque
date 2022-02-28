@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
@@ -20,6 +22,7 @@ def esp_session(request, encode):
         else:
             model = ItemAmox.objects.create()
             model.id_rfid = body['id']
+            model.data_last_alt = datetime.now()
             model.save()
 
         return HttpResponse(200)

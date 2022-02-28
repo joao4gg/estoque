@@ -1,21 +1,28 @@
 {% extends 'base.html' %}
+{% load custom_templatetags %}
 {% block content %}
+    {% csrf_token %}
     {% include 'elements/navbar.html' %}
-    <div class="ui left fixed vertical menu d-none" style="margin-top: 2.7%" id="drawer">
-        <a class="large item">
-            <div class="ui left"><i class="home icon"></i>Home</div>
-        </a>
-        <a class="large item">
-            <div class="ui left"><i class="search icon"></i>Busca Itens</div>
-        </a>
-        <a class="large item">
-            <div class="ui left"><i class="warning icon"></i>Cadastro Pendentes</div>
-        </a>
-        <a class="item"></a>
+    <div id="d_master">
+        <div class="ui left fixed vertical menu d-none" style="margin-top: 2.7%" id="drawer">
+            <a class="large item">
+                <div class="ui left"><i class="home icon"></i>Home</div>
+            </a>
+            <a class="large item">
+                <div class="ui left" onclick="change_screen('{% url 'buscar_item' %}')"><i class="search icon"></i>Busca Itens</div>
+            </a>
+            <a class="large item">
+                <div class="ui left"><i class="warning icon"></i>Cadastro Pendentes</div>
+            </a>
+            <a class="item"></a>
+        </div>
+        <div id="content" style="width: 98%; alignment: center; margin-top: 1%; margin-left: 1rem"></div>
     </div>
     <script>
         function showDrawer(){
             let drawer = document.getElementById('drawer')
+            let d_master = document.getElementById('d_master')
+            let content = document.getElementById('content')
             drawer.removeAttribute('class')
             if(drawer.hasAttribute('value')){
                 drawer.setAttribute('class', 'ui left fixed vertical menu d-none')
@@ -24,6 +31,15 @@
                 drawer.setAttribute('class', 'ui left fixed vertical menu')
                 drawer.setAttribute('value', 'active')
             }
+        }
+        function change_screen(url){
+            let drawer = document.getElementById('drawer')
+            drawer.setAttribute('class', 'ui left fixed vertical menu d-none')
+            drawer.removeAttribute('value')
+            console.log(url)
+             $.get(url).done(function (data) {
+                    document.getElementById('content').innerHTML = data
+                })
         }
     </script>
 {% endblock %}

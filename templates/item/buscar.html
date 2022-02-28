@@ -1,0 +1,25 @@
+{% load custom_templatetags %}
+<table class="ui table very compact striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>RFID</th>
+            <th>Data Ultima Alteração</th>
+            <th>Em Estoque</th>
+            <th>Responsavel pela Ultima Alteração</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for model in rows %}
+            <tr>
+                <td>{{ model.id }}</td>
+                <td>{{ model.name }}</td>
+                <td>{{ model.id_rfid }}</td>
+                <td>{{ model.data_last_alt|date:'d/m/Y h:m:s' }}</td>
+                <td>{{ model.available|bool_value }}</td>
+                <td>{{ model.id_user.first_name }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

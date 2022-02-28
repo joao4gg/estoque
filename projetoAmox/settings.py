@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-8l(#c&rxsnw3j98=yrj0+ai!h59^fh*iq7bcunr$!p+zi2q3n4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -66,8 +66,12 @@ WSGI_APPLICATION = 'projetoAmox.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'amox_db',
+        'USER': 'amox_admin',
+        'PASSWORD': '@AmoxSql#2021',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
 
