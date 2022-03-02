@@ -9,14 +9,16 @@ from AmoxProject.models.item_amox import ItemAmox
 
 @csrf_exempt
 def esp_session(request, encode):
-    if request.method == 'POST':
+    if request.method == 'GET':
         body = basic_decode(encode)
 
         item = ItemAmox.objects.filter(id_rfid=body['id']).last()
         if item is not None:
             if item.available:
+                item.data_last_alt = datetime.now()
                 item.available = False
             else:
+                item.data_last_alt = datetime.now()
                 item.available = True
 
         else:

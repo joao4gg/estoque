@@ -18,7 +18,11 @@
         <div class="ui right aligned item">
             <h3>
                 <i class="wrench icon"></i>
-                S.C.G.E.A
+                {% if titulo %}
+                    {{ titulo }}
+                {% else %}
+                    S.C.G.E.A
+                {% endif %}
             </h3>
         </div>
         <div class="ui right aligned item">

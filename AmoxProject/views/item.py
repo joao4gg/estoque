@@ -9,6 +9,7 @@ def buscar(request):
     if request.method == 'GET':
         rows = ItemAmox.objects.filter()
         dados = {
+            'titulo': 'Items - Buscar',
             'rows': rows
         }
 

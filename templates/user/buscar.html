@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load custom_templatetags %}
 {% block content %}
-    {% csrf_token %}
     {% include 'elements/navbar.html' %}
     <div id="d_master">
         <div class="ui left fixed vertical menu d-none" style="margin-top: 2.7%" id="drawer">
@@ -21,6 +20,49 @@
         </div>
         <div id="content" style="width: 98%; alignment: center; margin-top: 1%; margin-left: 1rem"></div>
     </div>
+
+    <form class="ui form container segment" style="margin-top: auto !important; width: 80%" onsubmit="Loading()"
+          action="{% url 'user_buscar' %}" method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        <div class="ui center aligned field" style="display: flex; align-content: center; justify-content: center">
+            <input class="" value="" id="txt_buscar" style="width: 60%"
+               name="busca" type="text" required/>
+            <input type="button" value="Buscar" class="ui green button fixed" style="margin-left: 0.5rem">
+            <a type="button" class="ui blue button fixed" href="{% url 'user_inserir' %}">Adicionar</a>
+        </div>
+        <table class="ui celled table very compact striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Usuario</th>
+                    <th>Nome</th>
+                    <th>Ultimo Login</th>
+                    <th>Ativo</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for model in rows %}
+                    <tr>
+                        <td>{{ model.id }}</td>
+                        <td>{{ model.username }}</td>
+                        <td>{{ model.first_name }}</td>
+                        <td>{{ model.last_login|date:'d/m/Y h:m:s' }}</td>
+                        <td>{{ model.is_active|bool_value }}</td>
+                        <td>
+                            <a class="small button abre-popup"
+                               onclick=""
+                               data-position="top right" data-content="Editar Usuario">
+                                <i class="blue user icon link"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </form>
     <script>
         function showDrawer(){
             let drawer = document.getElementById('drawer')

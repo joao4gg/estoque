@@ -1,25 +1,61 @@
+{% extends 'base.html' %}
 {% load custom_templatetags %}
-<table class="ui table very compact striped">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>RFID</th>
-            <th>Data Ultima Alteração</th>
-            <th>Em Estoque</th>
-            <th>Responsavel pela Ultima Alteração</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for model in rows %}
+{% block content %}
+    {% include 'elements/navbar.html' %}
+    <div id="d_master">
+        <div class="ui left fixed vertical menu d-none" style="margin-top: 2.7%" id="drawer">
+            <a class="large item">
+                <div class="ui left"><i class="home icon"></i>Home</div>
+            </a>
+            <a class="large item" href="{% url 'buscar_item' %}">
+                <div class="ui left"><i class="search icon"></i>Busca Itens</div>
+            </a>
+            <a class="large item">
+                <div class="ui left"><i class="warning icon"></i>Cadastro Pendentes</div>
+            </a>
+            <a class="large item" href="{% url 'user_buscar' %}">
+                <div class="ui left"><i class="user icon"></i>Usuarios</div>
+            </a>
+            <a class="item"></a>
+        </div>
+        <div id="content" style="width: 98%; alignment: center; margin-top: 1%; margin-left: 1rem"></div>
+    </div>
+
+    <form class="ui form container segment" style="margin-top: auto !important; width: 80%" onsubmit="Loading()"
+          action="{% url 'user_buscar' %}" method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+    <div class="ui center aligned field" style="display: flex; align-content: center; justify-content: center">
+            <input class="" value="" id="txt_buscar" style="width: 60%" placeholder="Buscar"
+               name="busca" type="text" required/>
+            <select class="ui fluid search dropdown" id="buscar_filtro" name="filtro" style="width: 10%!important; margin-left: 0.5rem">
+                <option value="id_rfid"selected>RFID</option>
+                <option value="name">Nome</option>
+            </select>
+            <input type="button" value="Buscar" class="ui green button fixed" style="margin-left: 0.5rem">
+    </div>
+    <table class="ui celled table very compact striped">
+        <thead>
             <tr>
-                <td>{{ model.id }}</td>
-                <td>{{ model.name }}</td>
-                <td>{{ model.id_rfid }}</td>
-                <td>{{ model.data_last_alt|date:'d/m/Y h:m:s' }}</td>
-                <td>{{ model.available|bool_value }}</td>
-                <td>{{ model.id_user.first_name }}</td>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>RFID</th>
+                <th>Data Ultima Alteração</th>
+                <th>Em Estoque</th>
+                <th>Responsavel pela Ultima Alteração</th>
             </tr>
-        {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            {% for model in rows %}
+                <tr>
+                    <td>{{ model.id }}</td>
+                    <td>{{ model.name }}</td>
+                    <td>{{ model.id_rfid }}</td>
+                    <td>{{ model.data_last_alt|date:'d/m/Y h:m:s' }}</td>
+                    <td>{{ model.available|bool_value }}</td>
+                    <td>{{ model.id_user.first_name }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

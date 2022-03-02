@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load custom_templatetags %}
+{% block content %}
+
+    {% include 'elements/navbar.html' %}
+    {% if flag %}
+        <form class="ui form container segment" style="margin-top: auto !important;" onsubmit="Loading()"
+              action="{% url 'user_atualizar' %}" method="POST" enctype="multipart/form-data">
+        <label for="usuario_id"></label>
+    {% else %}
+        <form class="ui form container segment" style="margin-top: auto !important;" onsubmit="Loading()"
+              action="{% url 'user_inserir' %}" method="POST" enctype="multipart/form-data">
+    {% endif %}
+
+    <input type="hidden" id="usuario_id" name="id" {% if model %} value="{{ model.id }}" {% endif %}>
+
+
+    {% csrf_token %}
+
+    <div class="three fields">
+        <div class="field">
+            <label for="txt_usuario_nome">Nome Completo:</label>
+            <input class="" value="{{ model.first_name }}" id="txt_usuario_nome"
+                   name="first_name" type="text" required/>
+
+        </div>
+
+        <div class="field">
+            <label for="txt_usuario_username">Username:</label>
+            <input class="" value="{{ model.username }}" id="txt_usuario_username"
+                   name="username" type="text" required/>
+        </div>
+
+        <div class="field">
+            <label for="txt_usuario_rfid">RFID de Acesso:</label>
+            <input class="" value="{{ model.last_name }}" id="txt_usuario_rfid"
+                   name="last_name" type="text" required/>
+        </div>
+    </div>
+    <div class="three fields">
+        <div class="field">
+            <label for="txt_usuario_email">E-Mail:</label>
+            <input value="{{ model.email }}" id="txt_usuario_email"
+                   name="email" type="text" required/>
+
+        </div>
+        <div class="field">
+            <label for="txt_usuario_password">Senha:</label>
+            <input value="{{ model.password }}" id="txt_usuario_senha"
+                   name="password" type="text" required/>
+
+        </div>
+        <div class="field">
+            <label for="txt_usuario_is_active">Ativo:</label>
+            <select class="ui fluid search dropdown" id="buscar_is_active" name="is_active">
+                </option>
+                <option value="1" {% if model.is_active == True %} selected {% endif %}>Sim
+                </option>
+                <option value="0" {% if model.is_active == False %} selected {% endif %}>Não</option>
+            </select>
+        </div>
+    </div>
+
+<div class="center fixed-action-btn" style="margin-left: 45%; margin-top: 2rem;">
+    <input type="submit" value="Gravar" class="ui green button fixed df_button_width">
+</div>
+</form>
+
+<script>
+
+    //-------Função para validar username------------------//
+    $('#txt_usuario_nome').blur(function () {
+        let nome = document.getElementById('txt_usuario_nome').value.toLowerCase();
+        nome = nome.normalize('NFD').replace(/[\u0300-\u036f]/g, "").split(' ');
+        let username = document.getElementById('txt_usuario_username').value;
+
+        if (nome !== '') {
+            username = nome[0] + '.' + nome[nome.length - 1];
+            document.getElementById('txt_usuario_username').value = username
+        } else {
+            AlertWarning('Erro', 'Insira nome e sobrenome', 5);
+        }
+
+    });
+    //-------Função para validar email------------------//
+    $('#txt_usuario_email').blur(function () {
+        let email = document.getElementById('txt_usuario_email').value;
+        let er = new RegExp(/^[A-Za-z0-9_\-\.]+@[A-Za-z0-9_\-\.]{2,}\.[A-Za-z0-9]{2,}(\.[A-Za-z0-9])?/);
+        let encoded = btoa(`{"nome": "${email}"}`);
+
+        if (email !== '') {
+            if (!er.test(email)) {
+                $('#txt_usuario_email').attr('placeholder', 'Email Inválido!');
+                $('#txt_usuario_email').css('backgroundColor', 'rgba(255, 240, 240, 0.8)');
+                $('#txt_usuario_email').val('');
+            } else {
+                $('#txt_usuario_email').css('backgroundColor', 'white');
+            }
+        } else {
+            AlertWarning('Erro', 'Insira um email valido', 5);
+        }
+    });
+
+</script>
+
+{% endblock %}
