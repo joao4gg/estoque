@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="ui middle aligned center aligned grid" style="margin: 0;">
+
+        <div class="fx_card_center">
+
+            <form action="{% url 'user_login' %}" method="POST" id="checkbox" class="ui large form" onsubmit="Loading()">
+                {% csrf_token %}
+
+                <input type="hidden" value="{{ after_login }}" name="after_login">
+
+                <div class="ui stacked segment">
+
+                    <a class="ui blue right ribbon label" href="">Esqueceu sua senha?</a>
+
+                    <img class="ui image" src="{% static 'img/logo_sys.png' %}" width="75%"
+                         style="margin-left: auto; margin-right: auto; margin-top: 5%">
+
+
+                    <div class="field" style="margin-top: 5%">
+                        <div class="ui left icon input">
+                            <i class="user red icon"></i>
+                            <input id="usuario" type="text" class="validate center-align" name="usuario"
+                                   placeholder="Usuário ou e-mail" required>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="lock blue icon"></i>
+                            <input id="senha" type="password" class="validate center-align" name="senha"
+                                   placeholder="********" required>
+                        </div>
+                    </div>
+
+                    <button class="ui fluid large green button" style="width: 50%; margin-left: 25%" type="submit">
+                        Entrar
+                    </button>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+    <style type="text/css">
+        .modal p{
+            text-align: justify;
+        }
+
+        .grid {
+            height: 100%;
+        }
+
+        .column {
+            max-width: 40rem;
+        }
+    </style>
+{% endblock %}

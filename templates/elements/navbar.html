@@ -27,7 +27,8 @@
         </div>
         <div class="ui right aligned item">
             <i class="circle blue icon" style="max-height: 45px"></i>
-            <span><a href="/admin" target="_blank">{{ user.first_name }}</a></span>
+            <span><a href="/admin" target="_blank" style="margin-right: 3rem">{{ user.first_name }}</a></span>
+            <span><i class="button large sign out alternate icon" onclick="logout('{% url 'user_logout' %}')"></i></span>
         </div>
     </div>
     <script>
@@ -38,5 +39,10 @@
 
         $('.dropdown')
             .dropdown();
+        function logout(url){
+            $.get(url).done(function (){
+                location.reload();
+            })
+        }
     </script>
 {% endblock %}

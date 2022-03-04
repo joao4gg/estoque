@@ -2,37 +2,20 @@
 {% load custom_templatetags %}
 {% block content %}
     {% include 'elements/navbar.html' %}
-    <div id="d_master">
-        <div class="ui left fixed vertical menu d-none" style="margin-top: 2.7%" id="drawer">
-            <a class="large item">
-                <div class="ui left"><i class="home icon"></i>Home</div>
-            </a>
-            <a class="large item" href="{% url 'buscar_item' %}">
-                <div class="ui left"><i class="search icon"></i>Busca Itens</div>
-            </a>
-            <a class="large item">
-                <div class="ui left"><i class="warning icon"></i>Cadastro Pendentes</div>
-            </a>
-            <a class="large item" href="{% url 'user_buscar' %}">
-                <div class="ui left"><i class="user icon"></i>Usuarios</div>
-            </a>
-            <a class="item"></a>
-        </div>
-        <div id="content" style="width: 98%; alignment: center; margin-top: 1%; margin-left: 1rem"></div>
-    </div>
-
+    {% include 'drawer.html' %}
+    {% include 'drawer_js.html' %}
     <form class="ui form container segment" style="margin-top: auto !important; width: 80%" onsubmit="Loading()"
-          action="{% url 'user_buscar' %}" method="POST" enctype="multipart/form-data">
+          action="{% url 'buscar_item' %}" method="POST" enctype="multipart/form-data">
 
         {% csrf_token %}
     <div class="ui center aligned field" style="display: flex; align-content: center; justify-content: center">
-            <input class="" value="" id="txt_buscar" style="width: 60%" placeholder="Buscar"
-               name="busca" type="text" required/>
+            <input class="" value="{{ fields.busca }}" id="txt_buscar" style="width: 60%" placeholder="Buscar"
+               name="busca" type="text"/>
             <select class="ui fluid search dropdown" id="buscar_filtro" name="filtro" style="width: 10%!important; margin-left: 0.5rem">
-                <option value="id_rfid"selected>RFID</option>
-                <option value="name">Nome</option>
+                <option value="id_rfid" {% if fields.filtro == 'id_rfid' %}selected{% endif %}>RFID</option>
+                <option value="name" {% if fields.filtro == 'name' %}selected{% endif %}>Nome</option>
             </select>
-            <input type="button" value="Buscar" class="ui green button fixed" style="margin-left: 0.5rem">
+            <input type="submit" value="Buscar" class="ui green button fixed" style="margin-left: 0.5rem">
     </div>
     <table class="ui celled table very compact striped">
         <thead>
@@ -58,4 +41,5 @@
             {% endfor %}
         </tbody>
     </table>
+    </form>
 {% endblock %}

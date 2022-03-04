@@ -1,7 +1,3 @@
-
-const MONEY_FORMAT = { minimumFractionDigits: 2 , style: 'currency', currency: 'BRL' }
-
-
 function AlertSuccess(head, text, time = 3) {
     $('body').toast({
         title: head,
@@ -225,16 +221,6 @@ function question_segunda_via(url){
         }
     )
 }
-
-//---------------- Funções resize textarea----------------------------------------------------------------------------//
-$(document).ready(function () {
-    $('.autoTxtArea').each(function () {
-        this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px; overflow-y: hidden; min-height: unset; max-height: unset;');
-    }).on('input', function () {
-        this.style.height = 'auto';
-        this.style.height = (this.scrollHeight) + 'px';
-    });
-});
 
 //---------------- Fim da funções resize textarea---------------------------------------------------------------------//
 

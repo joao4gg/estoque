@@ -1,0 +1,25 @@
+<script>
+    function showDrawer(){
+        let drawer = document.getElementById('drawer')
+        let d_master = document.getElementById('d_master')
+        let content = document.getElementById('content')
+        drawer.removeAttribute('class')
+        if(drawer.hasAttribute('value')){
+            drawer.setAttribute('class', 'ui left fixed vertical menu d-none')
+            drawer.removeAttribute('value')
+        }else{
+            drawer.setAttribute('class', 'ui left fixed vertical menu')
+            drawer.setAttribute('value', 'active')
+        }
+    }
+    function change_screen(url){
+        let drawer = document.getElementById('drawer')
+        drawer.setAttribute('class', 'ui left fixed vertical menu d-none')
+        drawer.removeAttribute('value')
+        console.log(url)
+        location.href(url)
+         $.get(url).done(function (data) {
+                document.getElementById('content').innerHTML = data
+            })
+    }
+</script>

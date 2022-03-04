@@ -1,0 +1,19 @@
+{% block content %}
+    <div id="d_master">
+        <div class="ui left fixed vertical menu d-none" style="margin-top: 3.7rem" id="drawer">
+            <a class="large item" href="{% url 'index' %}">
+                <div class="ui left"><i class="home icon"></i>Home</div>
+            </a>
+            <a class="large item" href="{% url 'buscar_item' %}">
+                <div class="ui left"><i class="search icon"></i>Busca Itens</div>
+            </a>
+            <a class="large item">
+                <div class="ui left"><i class="warning icon"></i>Cadastro Pendentes</div>
+            </a>
+            <a class="large item" href="{% url 'user_buscar' %}">
+                <div class="ui left"><i class="user icon"></i>Usuarios</div>
+            </a>
+            <a class="item"></a>
+        </div>
+    </div>
+{% endblock %}

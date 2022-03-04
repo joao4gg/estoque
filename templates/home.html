@@ -1,0 +1,43 @@
+{% load custom_templatetags %}
+{% block content %}
+    <div id="content" style="width: 98%; alignment: center; margin-top: 1%; margin-left: 1rem" class="ui middle aligned center aligned grid">
+        <div class="ui cards">
+            <div class="card">
+                <div class="content">
+                    <div class="header text center aligned">Total de itens cadastrados</div>
+                </div>
+                <div class="content">
+                    <div class="ui huge statistic">
+                        <div class="value">
+                            {{ qtd_itens }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="content">
+                    <div class="header text center aligned">Total de itens em estoque</div>
+                </div>
+                <div class="content">
+                    <div class="ui huge statistic">
+                        <div class="value">
+                            {{ qtd_itens_em_estoque }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="content">
+                    <div class="header text center aligned">Total de itens fora de estoque</div>
+                </div>
+                <div class="content">
+                    <div class="ui huge statistic">
+                        <div class="value">
+                            {{ qtd_itens_fora_estoque }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

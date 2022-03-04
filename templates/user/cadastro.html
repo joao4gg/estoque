@@ -7,6 +7,7 @@
         <form class="ui form container segment" style="margin-top: auto !important;" onsubmit="Loading()"
               action="{% url 'user_atualizar' %}" method="POST" enctype="multipart/form-data">
         <label for="usuario_id"></label>
+        <input hidden value="{{ model.id }}" id="usuario_id" name="id">
     {% else %}
         <form class="ui form container segment" style="margin-top: auto !important;" onsubmit="Loading()"
               action="{% url 'user_inserir' %}" method="POST" enctype="multipart/form-data">
@@ -45,9 +46,18 @@
 
         </div>
         <div class="field">
-            <label for="txt_usuario_password">Senha:</label>
-            <input value="{{ model.password }}" id="txt_usuario_senha"
-                   name="password" type="text" required/>
+            {% if flag %}
+                <label for="txt_usuario_password">Senha:</label>
+                <div class="ui action input" id="txt_usuario_password">
+                    <input type="password" placeholder="" value="{{ model.password }}" id="txt_pass" readonly name="password">
+                    <a type="button" class="ui orange button" onclick="change_pass(this)">Mudar Senha</a>
+                </div>
+            {% else %}
+                <label for="txt_usuario_password">Senha:</label>
+                <input value="{{ model.password }}" id="txt_usuario_senha"
+                       name="password" type="text" required/>
+            {% endif %}
+
 
         </div>
         <div class="field">
@@ -61,8 +71,9 @@
         </div>
     </div>
 
-<div class="center fixed-action-btn" style="margin-left: 45%; margin-top: 2rem;">
+<div class="center fixed-action-btn" style="margin-left: 38%; margin-top: 2rem;">
     <input type="submit" value="Gravar" class="ui green button fixed df_button_width">
+    <a class="ui yellow button fixed df_button_width" type="button" href="{% url 'user_buscar' %}">Voltar</a>
 </div>
 </form>
 
@@ -100,7 +111,12 @@
             AlertWarning('Erro', 'Insira um email valido', 5);
         }
     });
-
+    function change_pass(e){
+        let txt_pass = document.getElementById('txt_pass')
+        txt_pass.removeAttribute('readonly')
+        txt_pass.value = ''
+        e.setAttribute('class', 'ui orange button disabled')
+    }
 </script>
 
 {% endblock %}
