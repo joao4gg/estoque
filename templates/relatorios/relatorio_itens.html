@@ -1,0 +1,26 @@
+{% load static custom_templatetags%}
+
+{% block content %}
+    <table class="ui celled table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>RFID</th>
+                <th>Nome</th>
+                <th>Data Ultima Alteração</th>
+                <th>Responsavel pela Ultima Alteração</th>
+                <th>Em Estoque</th>
+            </tr>
+        <tbody>
+            {% for model in rows %}
+                <tr>
+                    <td>{{ model.id }}</td>
+                    <td>{{ model.id_rfid }}</td>
+                    <td>{{ model.data_last_alt|date:'d/m/Y h:m:s' }}</td>
+                    <td>{{ model.id_user.first_name }}</td>
+                    <td>{{ model.available|null_value }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

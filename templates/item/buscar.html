@@ -51,4 +51,25 @@
         </tbody>
     </table>
     </form>
+    <div class="floating_elements">
+        <a onclick="exportXls('{% url 'amox_rel_itens' %}')" class="button" id="floating_xls">
+            <i class="circular inverted orange big file excel outline icon link abre-popup"
+            data-content="Exportar Relatório"></i>
+        </a>
+    </div>
+    <script>
+        $('.floating_element').on('mousemove', function () {
+            this.style.opacity = '100%';
+        });
+
+        $('.floating_element').on('mouseout', function () {
+            this.style.opacity = '50%';
+        });
+        function exportXls(url){
+            $.get(url).done(function (data){
+                let decode = JSON.parse(data)
+                document.location.href = decode.path
+            })
+        }
+    </script>
 {% endblock %}
