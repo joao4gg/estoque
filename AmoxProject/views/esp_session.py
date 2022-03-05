@@ -47,20 +47,27 @@ def login_esp_user(request, encode):
         user = User.objects.filter(last_name=body['id'].upper()).last()
         if user is not None:
             aux_user = AuxUser.objects.filter(id_user=user).last()
-            if aux_user.last_login < datetime.now() - timedelta(hours=1):
-                aux_user.last_login = datetime.now()
-                aux_user.logout_dt = None
-                aux_user.save()
-                user.save()
-                return HttpResponse(f'{user.first_name.split(" ")[0]}', status=200)
-            elif aux_user.logout_dt is not None:
-                aux_user.last_login = datetime.now()
-                aux_user.logout_dt = None
-                aux_user.save()
-                user.save()
-                return HttpResponse(f'{user.first_name.split(" ")[0]}', status=200)
+            if aux_user.last_login is not None:
+                if aux_user.last_login < datetime.now() - timedelta(hours=1):
+                    aux_user.last_login = datetime.now()
+                    aux_user.logout_dt = None
+                    aux_user.save()
+                    user.save()
+                    return HttpResponse(f'{user.first_name.split(" ")[0]}', status=200)
+                elif aux_user.logout_dt is not None:
+                    aux_user.last_login = datetime.now()
+                    aux_user.logout_dt = None
+                    aux_user.save()
+                    user.save()
+                    return HttpResponse(f'{user.first_name.split(" ")[0]}', status=200)
+                else:
+                    return HttpResponse('Sessão já Iniciada!', status=202)
             else:
-                return HttpResponse('Sessão já Iniciada!', status=202)
+                aux_user.last_login = datetime.now()
+                aux_user.logout_dt = None
+                aux_user.save()
+                user.save()
+                return HttpResponse(f'{user.first_name.split(" ")[0]}', status=200)
         else:
             return HttpResponse('Usuario não Encontrado', status=403)
 
