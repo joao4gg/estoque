@@ -62,12 +62,6 @@ TEMPLATES = [
     },
 ]
 
-LANGUAGE_CODE = 'pt-br'
-
-LOCALE_NAME = 'pt_BR'
-
-TIME_ZONE = 'America/Sao_Paulo'
-
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.contrib.messages.context_processors.messages',
@@ -113,14 +107,17 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+LOCALE_NAME = 'pt_BR'
 
-USE_I18N = True
+TIME_ZONE = 'America/Sao_Paulo'
 
-USE_TZ = True
+USE_I18N = False
 
+USE_L10N = True
+
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
