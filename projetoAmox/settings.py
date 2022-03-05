@@ -2,9 +2,9 @@ import locale
 import os
 from pathlib import Path
 from datetime import datetime
+from django.contrib.messages import constants as messages
 
 
-locale.setlocale(locale.LC_ALL, "pt_BR.UTF-8")
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
