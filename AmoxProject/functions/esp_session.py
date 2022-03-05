@@ -8,7 +8,7 @@ from AmoxProject.models.aux_user import AuxUser
 
 def get_user_session():
     users = AuxUser.objects.filter().order_by('last_login')
-    sub_date = datetime.datetime.now() - timedelta(hours=1)
+    sub_date = (datetime.datetime.now() - timedelta(hours=1))
     retorno = None
     for user in users:
         if user.last_login > sub_date:
