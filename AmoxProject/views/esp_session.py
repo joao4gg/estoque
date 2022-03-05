@@ -54,13 +54,13 @@ def login_esp_user(request, encode):
                     aux_user.logout_dt = None
                     aux_user.save()
                     user.save()
-                    return HttpResponse(f'{user.first_name.split(" ")[0]} - Login', status=200)
+                    return HttpResponse(f'{user.first_name.split(" ")[0]}', status=200)
                 elif aux_user.logout_dt is not None:
                     aux_user.last_login = datetime.now()
                     aux_user.logout_dt = None
                     aux_user.save()
                     user.save()
-                    return HttpResponse(f'{user.first_name.split(" ")[0]} - Login', status=200)
+                    return HttpResponse(f'{user.first_name.split(" ")[0]}', status=200)
                 else:
                     return HttpResponse('Sessão já Iniciada!', status=202)
             else:
@@ -68,7 +68,7 @@ def login_esp_user(request, encode):
                 aux_user.logout_dt = None
                 aux_user.save()
                 user.save()
-                return HttpResponse(f'{user.first_name.split(" ")[0]} - Login', status=200)
+                return HttpResponse(f'{user.first_name.split(" ")[0]}', status=200)
         else:
             return HttpResponse('Usuario não Encontrado', status=403)
 
@@ -89,7 +89,8 @@ def logout_esp_user(request, encode):
                     return HttpResponse(f'Sessão Invalida!', status=402)
                 else:
                     aux_user.logout_dt = datetime.now()
-                    return HttpResponse(f'{user.first_name.split(" ")[0]} - Logout', status=200)
+                    aux_user.save()
+                    return HttpResponse(f'{user.first_name.split(" ")[0]}', status=200)
             else:
                 return HttpResponse('Usuario não encontrado - AuxUser', status=403)
         else:
