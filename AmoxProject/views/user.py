@@ -131,7 +131,7 @@ def atualizar(request):
                 usuario.username = request.POST['username']
                 if usuario.password != request.POST['password']:
                     usuario.set_password(request.POST['password'])
-                    aux_user = AuxUser.objects.filter(id_user=usuario)
+                    aux_user = AuxUser.objects.filter(id_user=usuario).last()
                     aux_user.code_pass = basic_encode(request.POST['password'])
                     aux_user.save()
                 usuario.first_name = request.POST['first_name']
