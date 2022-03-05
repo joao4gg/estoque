@@ -13,7 +13,9 @@
                name="busca" type="text"/>
             <select class="ui fluid search dropdown" id="buscar_filtro" name="filtro" style="width: 10%!important; margin-left: 0.5rem">
                 <option value="id_rfid" {% if fields.filtro == 'id_rfid' %}selected{% endif %}>RFID</option>
-                <option value="name" {% if fields.filtro == 'name' %}selected{% endif %}>Nome</option>
+                {% if not cad_pen %}
+                    <option value="name" {% if fields.filtro == 'name' %}selected{% endif %}>Nome</option>
+                {% endif %}
             </select>
             <input type="submit" value="Buscar" class="ui green button fixed" style="margin-left: 0.5rem">
     </div>
@@ -26,17 +28,24 @@
                 <th>Data Ultima Alteração</th>
                 <th>Em Estoque</th>
                 <th>Responsavel pela Ultima Alteração</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
             {% for model in rows %}
                 <tr>
                     <td>{{ model.id }}</td>
-                    <td>{{ model.name }}</td>
+                    <td>{{ model.name|null_value }}</td>
                     <td>{{ model.id_rfid }}</td>
                     <td>{{ model.data_last_alt|date:'d/m/Y h:m:s' }}</td>
                     <td>{{ model.available|bool_value }}</td>
                     <td>{{ model.id_user.first_name }}</td>
+                    <td>
+                        <a class="small button abre-popup"
+                           href="{% url 'editar_item' model.id %}" data-tooltip="Editar Item">
+                            <i class="orange wrench icon link"></i>
+                        </a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

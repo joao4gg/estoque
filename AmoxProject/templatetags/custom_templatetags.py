@@ -8,3 +8,11 @@ def bool_value(value):
         return 'Sim'
     else:
         return 'Não'
+
+
+@register.filter
+def null_value(value):
+    if value is None or value == 'None':
+        return ''
+    else:
+        return value

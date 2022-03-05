@@ -7,8 +7,17 @@
             <a class="large item" href="{% url 'buscar_item' %}">
                 <div class="ui left"><i class="search icon"></i>Busca Itens</div>
             </a>
-            <a class="large item">
-                <div class="ui left"><i class="warning icon"></i>Cadastro Pendentes</div>
+            <a class="large item" href="{% url 'buscar_item' %}?flag=true">
+                <div class="ui left" style="margin-left: 1rem">
+                    <div class="ui two column grid">
+                        <div class="column" style="white-space: nowrap">
+                                <i class="warning icon"></i>Cadastro Pendentes
+                        </div>
+                        <div class="column">
+                            <div class="ui top right attached label" id="notification_qtd"></div>
+                        </div>
+                    </div>
+                </div>
             </a>
             <a class="large item" href="{% url 'user_buscar' %}">
                 <div class="ui left"><i class="user icon"></i>Usuarios</div>

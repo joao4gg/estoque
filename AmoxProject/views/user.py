@@ -1,6 +1,10 @@
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
+from django.db.models import Q
 from django.shortcuts import redirect, render
+
+from AmoxProject.master import basic_encode
+from AmoxProject.models.aux_user import AuxUser
 
 
 def login(request):
@@ -33,13 +37,25 @@ def logout(request):
 def buscar(request):
     if request.user.is_authenticated:
         if request.user.has_perm('auth.view_user'):
+            fields = dict()
             if request.method == 'GET':
-                users = User.objects.filter()
-                dados = {
-                    'titulo': 'Usuarios - Buscar',
-                    'rows': users
-                }
-                return render(request, 'user/buscar.html', dados)
+                rows = User.objects.filter()
+            else:
+                fields = {'busca': request.POST['busca'], 'filtro': request.POST['filtro']}
+                if request.POST['busca'] != '':
+                    if request.POST['filtro'] == 'username':
+                        rows = User.objects.filter(Q(username__icontains=request.POST['busca']))
+                    else:
+                        rows = User.objects.filter(Q(first_name__icontains=request.POST['busca']))
+                else:
+                    rows = User.objects.filter()
+
+            dados = {
+                'titulo': 'Usuarios - Buscar',
+                'rows': rows,
+                'fields': fields
+            }
+            return render(request, 'user/buscar.html', dados)
         else:
             return redirect('/admin/')
     else:
@@ -73,6 +89,10 @@ def inserir(request):
                 model.save()
 
                 if model is not None:
+                    aux_user = AuxUser.objects.create()
+                    aux_user.code_pass = basic_encode(request.POST['password'])
+                    aux_user.save()
+
                     messages.success(request, 'Usuario Cadastrado com sucesso!')
                     return redirect('user_buscar')
                 else:
@@ -111,6 +131,9 @@ def atualizar(request):
                 usuario.username = request.POST['username']
                 if usuario.password != request.POST['password']:
                     usuario.set_password(request.POST['password'])
+                    aux_user = AuxUser.objects.filter(id_user=usuario)
+                    aux_user.code_pass = basic_encode(request.POST['password'])
+                    aux_user.save()
                 usuario.first_name = request.POST['first_name']
                 usuario.email = request.POST['email']
                 usuario.last_name = request.POST['last_name'].upper()

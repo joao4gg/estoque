@@ -1,4 +1,7 @@
 <script>
+    $(document).ready(function() {
+      menuNotification();
+    });
     function showDrawer(){
         let drawer = document.getElementById('drawer')
         let d_master = document.getElementById('d_master')
@@ -22,4 +25,20 @@
                 document.getElementById('content').innerHTML = data
             })
     }
+    function menuNotification() {
+            $.get('/menu/notification')
+                .done(function (data) {
+                    let decode = JSON.parse(data)
+                    let element = document.getElementById('notification_qtd')
+                    if (element !== null){
+                        element.innerHTML = decode.value;
+                        if (decode.value > 0 ){
+                            element.classList.remove('d-none');
+                        }else{
+                            element.classList.add('d-none');
+                        }
+                    }
+                    setTimeout(menuNotification, 5000)
+                })
+        }
 </script>

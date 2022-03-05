@@ -11,7 +11,11 @@
 
         <div class="ui center aligned field" style="display: flex; align-content: center; justify-content: center">
             <input class="" value="" id="txt_buscar" style="width: 60%"
-               name="busca" type="text" required/>
+               name="busca" type="text"/>
+            <select class="ui fluid search dropdown" id="buscar_filtro" name="filtro" style="width: 10%!important; margin-left: 0.5rem">
+                <option value="username" {% if fields.filtro == 'username' %}selected{% endif %}>Login</option>
+                <option value="first_name" {% if fields.filtro == 'first_name' %}selected{% endif %}>Nome</option>
+            </select>
             <input type="button" value="Buscar" class="ui green button fixed" style="margin-left: 0.5rem">
             <a type="button" class="ui blue button fixed" href="{% url 'user_inserir' %}">Adicionar</a>
         </div>
