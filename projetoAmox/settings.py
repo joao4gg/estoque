@@ -1,6 +1,10 @@
+import locale
 import os
 from pathlib import Path
+from datetime import datetime
 
+
+locale.setlocale(locale.LC_ALL, "pt_BR.UTF-8")
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -57,6 +61,12 @@ TEMPLATES = [
         },
     },
 ]
+
+LANGUAGE_CODE = 'pt-br'
+
+LOCALE_NAME = 'pt_BR'
+
+TIME_ZONE = 'America/Sao_Paulo'
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
