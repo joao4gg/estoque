@@ -44,7 +44,7 @@ def esp_session(request, encode):
 def login_esp_user(request, encode):
     if request.method == 'POST':
         body = basic_decode(encode)
-        user = User.objects.filter(last_name=body['id']).last()
+        user = User.objects.filter(last_name=body['id'].upper()).last()
         if user is not None:
             aux_user = AuxUser.objects.filter(id_user=user).last()
             if aux_user.last_login < datetime.now() - timedelta(hours=1):
