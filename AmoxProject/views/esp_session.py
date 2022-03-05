@@ -79,7 +79,7 @@ def login_esp_user(request, encode):
 def logout_esp_user(request, encode):
     if request.method == 'POST':
         body = basic_decode(encode)
-        user = User.objects.filter(last_name=body['id'][1:]).last()
+        user = User.objects.filter(last_name=body['id'][1:].upper()).last()
         if user is not None:
             aux_user = AuxUser.objects.filter(id_user=user).last()
             if aux_user is not None:
@@ -88,7 +88,8 @@ def logout_esp_user(request, encode):
                 else:
                     aux_user.logout_dt = datetime.now()
                     return HttpResponse(f'{user.first_name.split(" ")[0]}', status=200)
-
+            else:
+                return HttpResponse('Usuario não encontrado - AuxUser', status=403)
         else:
             return HttpResponse('Usuario não Encontrado', status=403)
 
