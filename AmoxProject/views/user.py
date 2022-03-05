@@ -36,28 +36,25 @@ def logout(request):
 
 def buscar(request):
     if request.user.is_authenticated:
-        if request.user.has_perm('auth.view_user'):
-            fields = dict()
-            if request.method == 'GET':
-                rows = User.objects.filter()
-            else:
-                fields = {'busca': request.POST['busca'], 'filtro': request.POST['filtro']}
-                if request.POST['busca'] != '':
-                    if request.POST['filtro'] == 'username':
-                        rows = User.objects.filter(Q(username__icontains=request.POST['busca']))
-                    else:
-                        rows = User.objects.filter(Q(first_name__icontains=request.POST['busca']))
-                else:
-                    rows = User.objects.filter()
-
-            dados = {
-                'titulo': 'Usuarios - Buscar',
-                'rows': rows,
-                'fields': fields
-            }
-            return render(request, 'user/buscar.html', dados)
+        fields = dict()
+        if request.method == 'GET':
+            rows = User.objects.filter()
         else:
-            return redirect('/admin/')
+            fields = {'busca': request.POST['busca'], 'filtro': request.POST['filtro']}
+            if request.POST['busca'] != '':
+                if request.POST['filtro'] == 'username':
+                    rows = User.objects.filter(Q(username__icontains=request.POST['busca']))
+                else:
+                    rows = User.objects.filter(Q(first_name__icontains=request.POST['busca']))
+            else:
+                rows = User.objects.filter()
+
+        dados = {
+            'titulo': 'Usuarios - Buscar',
+            'rows': rows,
+            'fields': fields
+        }
+        return render(request, 'user/buscar.html', dados)
     else:
         return redirect('/admin/')
 
