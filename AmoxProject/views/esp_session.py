@@ -29,7 +29,7 @@ def esp_session(request, encode):
             user = get_user_session()
 
             model = ItemAmox.objects.create()
-            model.id_rfid = body['id'].upper()
+            model.id_rfid = body['id'][1:].upper()
             model.data_last_alt = datetime.now()
             if user is not None:
                 model.id_user = user.id_user
@@ -44,7 +44,7 @@ def esp_session(request, encode):
 def login_esp_user(request, encode):
     if request.method == 'POST':
         body = basic_decode(encode)
-        user = User.objects.filter(last_name=body['id'].upper()).last()
+        user = User.objects.filter(last_name=body['id'][1:].upper()).last()
         if user is not None:
             aux_user = AuxUser.objects.filter(id_user=user).last()
             if aux_user.last_login is not None:
@@ -79,7 +79,7 @@ def login_esp_user(request, encode):
 def logout_esp_user(request, encode):
     if request.method == 'POST':
         body = basic_decode(encode)
-        user = User.objects.filter(last_name=body['id']).last()
+        user = User.objects.filter(last_name=body['id'][1:]).last()
         if user is not None:
             aux_user = AuxUser.objects.filter(id_user=user).last()
             if aux_user is not None:
