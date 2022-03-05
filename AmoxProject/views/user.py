@@ -90,6 +90,7 @@ def inserir(request):
 
                 if model is not None:
                     aux_user = AuxUser.objects.create()
+                    aux_user.id_user = model
                     aux_user.code_pass = basic_encode(request.POST['password'])
                     aux_user.save()
 
