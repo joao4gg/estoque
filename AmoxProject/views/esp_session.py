@@ -47,8 +47,9 @@ def login_esp_user(request, encode):
         user = User.objects.filter(last_name=body['id'][1:].upper()).last()
         if user is not None:
             aux_user = AuxUser.objects.filter(id_user=user).last()
+            sub_dt = (datetime.now() - timedelta(hours=1))
             if aux_user.last_login is not None:
-                if aux_user.last_login < datetime.now() - timedelta(hours=1):
+                if aux_user.last_login < sub_dt:
                     aux_user.last_login = datetime.now()
                     aux_user.logout_dt = None
                     aux_user.save()
@@ -81,9 +82,10 @@ def logout_esp_user(request, encode):
         body = basic_decode(encode)
         user = User.objects.filter(last_name=body['id'][1:].upper()).last()
         if user is not None:
+            sub_dt = (datetime.now() - timedelta(hours=2))
             aux_user = AuxUser.objects.filter(id_user=user).last()
             if aux_user is not None:
-                if aux_user.last_login < datetime.now() - timedelta(hours=2):
+                if aux_user.last_login < sub_dt:
                     return HttpResponse(f'Sessão Invalida!', status=402)
                 else:
                     aux_user.logout_dt = datetime.now()
