@@ -3,6 +3,8 @@
 {% block content %}
 
     {% include 'elements/navbar.html' %}
+    {% include 'drawer.html' %}
+    {% include 'drawer_js.html' %}
     <form class="ui form container segment" style="margin-top: auto !important;" onsubmit="Loading()"
           action="{% url 'atualizar_item' %}" method="POST" enctype="multipart/form-data">
     <label for="usuario_id"></label>
