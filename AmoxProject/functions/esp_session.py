@@ -11,9 +11,10 @@ def get_user_session():
     sub_date = (datetime.datetime.now() - timedelta(hours=1))
     retorno = None
     for user in users:
-        if user.last_login > sub_date:
-            retorno = user
-            break
+        if user.last_login is not None:
+            if user.last_login > sub_date:
+                retorno = user
+                break
 
     return retorno
 

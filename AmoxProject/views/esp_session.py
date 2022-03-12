@@ -16,18 +16,24 @@ def esp_session(request, encode):
     if request.method == 'POST':
         body = basic_decode(encode)
 
-        item = ItemAmox.objects.filter(id_rfid=body['id']).last()
+        item = ItemAmox.objects.filter(id_rfid=body['id'][1:].upper()).last()
+        user = get_user_session()
+
         if item is not None:
             if item.available:
                 item.data_last_alt = datetime.now()
                 item.available = False
+                if user is not None:
+                    item.id_user = user.id_user
             else:
                 item.data_last_alt = datetime.now()
                 item.available = True
+                if user is not None:
+                    item.id_user = user.id_user
+
+            item.save()
 
         else:
-            user = get_user_session()
-
             model = ItemAmox.objects.create()
             model.id_rfid = body['id'][1:].upper()
             model.data_last_alt = datetime.now()
@@ -92,7 +98,7 @@ def logout_esp_user(request, encode):
                     aux_user.save()
                     return HttpResponse(f'{user.first_name.split(" ")[0]}', status=200)
             else:
-                return HttpResponse('Usuario não encontrado - AuxUser', status=403)
+                return HttpResponse('Usuario não encontrado', status=403)
         else:
             return HttpResponse('Usuario não Encontrado', status=403)
 
