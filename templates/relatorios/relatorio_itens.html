@@ -16,7 +16,7 @@
                 <tr>
                     <td>{{ model.id }}</td>
                     <td>{{ model.id_rfid }}</td>
-                    <td>{{ model.name }}</td>
+                    <td>{{ model.name|null_value }}</td>
                     <td>{{ model.data_last_alt|date:'d/m/Y h:m:s' }}</td>
                     <td>{{ model.id_user.first_name }}</td>
                     <td>{{ model.available|bool_value }}</td>
