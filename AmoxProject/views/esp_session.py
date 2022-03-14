@@ -5,10 +5,10 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from AlmoxProject.functions.esp_session import get_user_session
-from AlmoxProject.master import basic_decode
-from AlmoxProject.models.aux_user import AuxUser
-from AlmoxProject.models.item_almox import ItemAlmox
+from AmoxProject.functions.esp_session import get_user_session
+from AmoxProject.master import basic_decode
+from AmoxProject.models.aux_user import AuxUser
+from AmoxProject.models.item_amox import ItemAmox
 
 
 @csrf_exempt
@@ -16,7 +16,7 @@ def esp_session(request, encode):
     if request.method == 'POST':
         body = basic_decode(encode)
 
-        item = ItemAlmox.objects.filter(id_rfid=body['id'][1:].upper()).last()
+        item = ItemAmox.objects.filter(id_rfid=body['id'][1:].upper()).last()
         user = get_user_session()
 
         if item is not None:
@@ -34,7 +34,7 @@ def esp_session(request, encode):
             item.save()
 
         else:
-            model = ItemAlmox.objects.create()
+            model = ItemAmox.objects.create()
             model.id_rfid = body['id'][1:].upper()
             model.data_last_alt = datetime.now()
             if user is not None:
