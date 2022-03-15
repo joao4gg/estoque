@@ -13,12 +13,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'q)8(j#c&$2pc_+!43dbhde67y)bg^r2g+=25fe#%+g1(hr$jq+'
+SECRET_KEY = 'c88xlyp7#8lr*6zu^&p#ck*fgc&kp93-1qmu-3@ju^2+sr4des'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '35.226.73.52', '192.168.0.103']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -77,9 +77,9 @@ WSGI_APPLICATION = 'projetoAmox.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'amox_db',
-        'USER': 'amox_admin',
-        'PASSWORD': '@AmoxSql#2021',
+        'NAME': 'estoque_db',
+        'USER': 'estoque_admin',
+        'PASSWORD': '@Estoque#2022',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }

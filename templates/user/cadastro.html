@@ -20,7 +20,7 @@
 
     {% csrf_token %}
 
-    <div class="three fields">
+    <div class="two fields">
         <div class="field">
             <label for="txt_usuario_nome">Nome Completo:</label>
             <input class="" value="{{ model.first_name }}" id="txt_usuario_nome"
@@ -34,19 +34,8 @@
                    name="username" type="text" required/>
         </div>
 
-        <div class="field">
-            <label for="txt_usuario_rfid">RFID de Acesso:</label>
-            <input class="" value="{{ model.last_name }}" id="txt_usuario_rfid"
-                   name="last_name" type="text" required/>
-        </div>
     </div>
-    <div class="three fields">
-        <div class="field">
-            <label for="txt_usuario_email">E-Mail:</label>
-            <input value="{{ model.email }}" id="txt_usuario_email"
-                   name="email" type="text" required/>
-
-        </div>
+    <div class="two fields">
         <div class="field">
             {% if flag %}
                 <label for="txt_usuario_password">Senha:</label>

@@ -4,7 +4,6 @@ from django.db.models import Q
 from django.shortcuts import redirect, render
 
 from AmoxProject.master import basic_encode
-from AmoxProject.models.aux_user import AuxUser
 
 
 def login(request):
@@ -79,17 +78,11 @@ def inserir(request):
                 model.username = request.POST['username']
                 model.set_password(request.POST['password'])
                 model.first_name = request.POST['first_name']
-                model.email = request.POST['email']
-                model.last_name = request.POST['last_name'].upper()
                 model.is_active = True
                 model.groups.add(1)
                 model.save()
 
                 if model is not None:
-                    aux_user = AuxUser.objects.create()
-                    aux_user.id_user = model
-                    aux_user.code_pass = basic_encode(request.POST['password'])
-                    aux_user.save()
 
                     messages.success(request, 'Usuario Cadastrado com sucesso!')
                     return redirect('user_buscar')
@@ -129,33 +122,12 @@ def atualizar(request):
                 usuario.username = request.POST['username']
                 if usuario.password != request.POST['password']:
                     usuario.set_password(request.POST['password'])
-                    aux_user = AuxUser.objects.filter(id_user=usuario).last()
-                    if aux_user is not None:
-                        senha = basic_encode(request.POST['password'])
-                        aux_user.id_user = usuario
-                        aux_user.code_pass = senha
-                        aux_user.save()
-                    else:
-                        senha = basic_encode(request.POST['password'])
-                        aux_user = AuxUser.objects.create()
-                        aux_user.id_user = usuario
-                        aux_user.code_pass = senha
-                        aux_user.save()
+
                 usuario.first_name = request.POST['first_name']
-                usuario.email = request.POST['email']
-                usuario.last_name = request.POST['last_name'].upper()
                 usuario.is_active = request.POST['is_active']
                 usuario.groups.add(1)
                 usuario.save()
-                aux_user = AuxUser.objects.filter(id_user=usuario).last()
-                if aux_user is not None:
-                    aux_user.id_user = usuario
-                    aux_user.save()
-                else:
-                    aux_user = AuxUser.objects.create()
-                    aux_user.id_user = usuario
-                    aux_user.code_pass = usuario.password
-                    aux_user.save()
+
                 messages.success(request, 'Alterações Realizadas com Sucesso')
                 if usuario.password != request.POST['password']:
                     return redirect('index')

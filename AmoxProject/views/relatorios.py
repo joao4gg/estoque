@@ -6,13 +6,13 @@ from django.shortcuts import redirect
 from django.template.loader import get_template
 import pandas as pd
 
-from AmoxProject.models.item_amox import ItemAmox
+from AmoxProject.models.item_estoque import ItemEstoque
 
 
 def rel_itens(request):
     if request.user.is_authenticated:
         if request.method == 'GET':
-            itens = ItemAmox.objects.filter()
+            itens = ItemEstoque.objects.filter()
 
             dados = {
                 'rows': itens,

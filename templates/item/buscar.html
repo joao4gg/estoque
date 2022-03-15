@@ -12,7 +12,7 @@
             <input class="" value="{{ fields.busca }}" id="txt_buscar" style="width: 60%" placeholder="Buscar"
                name="busca" type="text"/>
             <select class="ui fluid search dropdown" id="buscar_filtro" name="filtro" style="width: 10%!important; margin-left: 0.5rem">
-                <option value="id_rfid" {% if fields.filtro == 'id_rfid' %}selected{% endif %}>RFID</option>
+                <option value="codigo" {% if fields.filtro == 'codigo' %}selected{% endif %}>Codigo</option>
                 {% if not cad_pen %}
                     <option value="name" {% if fields.filtro == 'name' %}selected{% endif %}>Nome</option>
                 {% endif %}
@@ -24,10 +24,9 @@
             <tr>
                 <th>ID</th>
                 <th>Nome</th>
-                <th>RFID</th>
-                <th>Data Ultima Alteração</th>
-                <th>Em Estoque</th>
-                <th>Responsavel pela Ultima Alteração</th>
+                <th>Codigo</th>
+                <th>Unidade</th>
+                <th>Quantidade</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -36,10 +35,9 @@
                 <tr>
                     <td>{{ model.id }}</td>
                     <td>{{ model.name|null_value }}</td>
-                    <td>{{ model.id_rfid }}</td>
-                    <td>{{ model.data_last_alt|date:'d/m/Y h:m:s' }}</td>
-                    <td>{{ model.available|bool_value }}</td>
-                    <td>{{ model.id_user.first_name }}</td>
+                    <td>{{ model.codigo }}</td>
+                    <td>{{ model.id_und.nome }}</td>
+                    <td>{{ model.qtde }}</td>
                     <td>
                         <a class="small button abre-popup"
                            href="{% url 'editar_item' model.id %}" data-tooltip="Editar Item">
@@ -52,7 +50,7 @@
     </table>
     </form>
     <div class="floating_elements">
-        <a onclick="exportXls('{% url 'amox_rel_itens' %}')" class="button" id="floating_xls">
+        <a onclick="exportXls('{% url 'estoque_rel_itens' %}')" class="button" id="floating_xls">
             <i class="circular inverted orange big file excel outline icon link abre-popup"
             data-content="Exportar Relatório"></i>
         </a>

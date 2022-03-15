@@ -5,8 +5,15 @@
     {% include 'elements/navbar.html' %}
     {% include 'drawer.html' %}
     {% include 'drawer_js.html' %}
-    <form class="ui form container segment" style="margin-top: auto !important;" onsubmit="Loading()"
+
+    {% if flag %}
+        <form class="ui form container segment" style="margin-top: auto !important;" onsubmit="Loading()"
           action="{% url 'atualizar_item' %}" method="POST" enctype="multipart/form-data">
+    {% else %}
+        <form class="ui form container segment" style="margin-top: auto !important;" onsubmit="Loading()"
+          action="{% url 'inserir_item' %}" method="POST" enctype="multipart/form-data">
+    {% endif %}
+
     <label for="usuario_id"></label>
     <input hidden value="{{ model.id }}" id="usuario_id" name="id">
 
@@ -14,24 +21,29 @@
 
     <div class="two fields">
         <div class="field">
-            <label for="txt_nome">Nome:</label>
+            <label for="txt_nome">Nome: *</label>
             <input class="" value="{{ model.name }}" id="txt_nome"
                    name="name" type="text" required/>
         </div>
 
         <div class="field">
-            <label for="txt_id_rfid">RFID:</label>
-            <input class="" value="{{ model.id_rfid }}" id="txt_rfid" readonly type="text"/>
+            <label for="txt_codigo">Codigo: *</label>
+            <input class="" value="{{ model.codigo }}" id="txt_codigo" type="text" required/>
         </div>
     </div>
     <div class="two fields">
         <div class="field">
-            <label for="txt_data_last_alt">RFID de Acesso:</label>
-            <input class="" value="{{ model.data_last_alt|date:'d/m/Y h:m:s' }}" id="txt_data_last_alt" type="text" readonly/>
+            <label for="txt_id_und">UND: *</label>
+            <select class="ui fluid search dropdown" id="txt_id_und" name="filtro" required>
+                <option value="">Selecione</option>
+                {% for und in tipo_und %}
+                    <option value="{{ und.id }}" {% if model.id_und_id == und.id %}selected{% endif %}>{{ und.nome }}</option>
+                {% endfor %}
+            </select>
         </div>
         <div class="field">
-            <label for="txt_available">Em Estoque:</label>
-            <input value="{{ model.available }}" id="txt_available" type="text" readonly/>
+            <label for="txt_qtde">Quantidade *:</label>
+            <input value="{{ model.qtde }}" id="txt_qtde" type="text" required/>
         </div>
     </div>
 
